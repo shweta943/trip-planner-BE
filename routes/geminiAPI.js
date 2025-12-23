@@ -1,4 +1,4 @@
-const  { getGeminiResponse } = require('./utils/geminiAPI');
+import { getGeminiResponse } from '../services/geminiSDK.js';
 
 router.post('/gemini', async (req, res) => {
   try {

@@ -1,7 +1,9 @@
-const express = require('express');
+import express from 'express';
+import { GoogleGenAI } from '@google/genai';
+import dotenv from 'dotenv';
+
 const router = express.Router();
-const {GoogleGenAI} = require('@google/genai')
-require("dotenv").config();
+dotenv.config();
 
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY });
 
@@ -10,7 +12,7 @@ async function getGeminiResponse(userPrompt) {
     // Define the query for a JSON array response
     try {
         const response = await ai.models.generateContent({
-            model: "gemini-2.0-flash",
+            model: "gemini-2.5-flash-lite",
             contents: userPrompt,
         })
 

@@ -1,21 +1,32 @@
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 const app = express();
 
-require("dotenv").config();
+// import geminiRoutes from './routes/geminiAPI.js';
 
-// const geminiRoutes = require('./routes/geminiAPI');
+app.use(cors({
+  origin: process.env.CORS_ORIGIN
+}));
 
-app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Trip Planner Backend is running");
 });
 
+// Error handler
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal server error',
+  });
+});
 // app.use('/api/gemini', geminiRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

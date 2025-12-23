@@ -1,4 +1,4 @@
-const { unsplash } = require('../utils/unsplashSDK');
+import { unsplash } from '../services/unsplashSDK.js';
         
 // Function to get images from Unsplash based on a query
 const getUnsplashImages = async (query, perPage) => {
