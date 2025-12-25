@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import geminiRoutes from './routes/geminiAPI.js';
 
 dotenv.config();
 const app = express();
@@ -24,7 +25,8 @@ app.use((err, req, res, next) => {
     error: err.message || 'Internal server error',
   });
 });
-// app.use('/api/gemini', geminiRoutes);
+
+app.use('/api/gemini', geminiRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
