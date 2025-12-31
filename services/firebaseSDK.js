@@ -1,5 +1,5 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+// Defines and exports the Firebase SDK clients for authentication and Firestore database
+import { initializeApp, admin } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from 'firebase/firestore';
 

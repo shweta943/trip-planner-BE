@@ -2,11 +2,10 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import geminiRoutes from './routes/geminiAPI.js';
+import authRoutes from './routes/firebaseAuth.js';
 
 dotenv.config();
 const app = express();
-
-// import geminiRoutes from './routes/geminiAPI.js';
 
 app.use(cors({
   origin: process.env.CORS_ORIGIN
@@ -26,7 +25,9 @@ app.use((err, req, res, next) => {
   });
 });
 
+
 app.use('/api/gemini', geminiRoutes);
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

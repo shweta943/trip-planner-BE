@@ -1,24 +1,22 @@
-import { unsplash } from '../services/unsplashSDK.js';
-        
-// Function to get images from Unsplash based on a query
-const getUnsplashImages = async (query, perPage) => {
-    try {
-        const images = await unsplash.search.getPhotos({
-            query,
-            page: 1,
-            perPage,
-            orientation: 'landscape'
-        })
-  
+import router from 'express';
+import { getUnsplashImages } from '../utils/getUnsplashResponse.utils.js';
+
+const router = express.Router();
+
+router.get('/unsplash', async (req, res) => {
+    const { query, perPage } = req.query;
     
-        if (images.errors) {
-            console.error("Unsplash API Error:", images.errors);
-            return [];
-          }
-          return images?.response?.results;
-    } catch (error) {
-        console.error('Error fetching Images', error);
+    if (!query) {
+        return res.status(400).json({ error: 'Query parameter is required' });
     }
-}
-// return images
-export default getUnsplashImages;
+    try {
+        const images = await getUnsplashImages(query, perPage || 10);
+        res.json({ data: images });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch images from Unsplash' });
+    }
+});
+
+export default router;
+
+
