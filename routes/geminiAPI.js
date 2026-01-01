@@ -1,5 +1,5 @@
 import express from 'express';
-import { getGeminiResponse } from '../services/geminiSDK.js';
+import { getGeminiResponse } from '../utils/getGeminiResponse.utils.js';
 import { generateExamplePrompt } from '../prompts.js';
 
 const router = express.Router();
