@@ -1,4 +1,4 @@
-import router from 'express';
+import express from 'express';
 import { getUnsplashImages } from '../utils/getUnsplashResponse.utils.js';
 
 const router = express.Router();
