@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import geminiRoutes from './routes/geminiAPI.js';
+import popularDestinations from './routes/popular-destinations.route.js';
 
 dotenv.config();
 const app = express();
@@ -26,6 +27,7 @@ app.use((err, req, res, next) => {
 
 
 app.use('/api/gemini', geminiRoutes);
+app.use('/api/ai', popularDestinations);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
