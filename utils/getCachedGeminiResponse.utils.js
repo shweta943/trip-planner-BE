@@ -8,6 +8,7 @@ import { cache } from '../services/cacheData.js';
 export const getCachedGeminiResponse = async (cacheKey, prompt, ttl) => {
     const cachedResponse = cache.get(cacheKey);
     if (cachedResponse) {
+        console.log('[CACHE HIT] Returning cached response for key:', cacheKey);
         return cachedResponse;
     }
     const response = await getGeminiResponse(prompt);
@@ -18,5 +19,6 @@ export const getCachedGeminiResponse = async (cacheKey, prompt, ttl) => {
     } else {
         cache.set(cacheKey, response); // Cache for default 7 days if no ttl is provided
     }
+    console.log('[CACHE MISS] Fetched API and cached response for key:', cacheKey);
     return response;
 }
