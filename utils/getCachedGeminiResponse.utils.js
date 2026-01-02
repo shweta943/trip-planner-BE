@@ -18,5 +18,5 @@ export const getCachedGeminiResponse = async (cacheKey, prompt, ttl) => {
     } else {
         cache.set(cacheKey, response); // Cache for default 7 days if no ttl is provided
     }
+    return response;
 }
-return response;
