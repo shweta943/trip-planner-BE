@@ -14,10 +14,11 @@ export const getCachedGeminiResponse = async (cacheKey, prompt, ttl) => {
     const response = await getGeminiResponse(prompt);
 
     if (response) {
-        if (ttl)
+        if (ttl) {
             cache.set(cacheKey, response, ttl);
-    } else {
-        cache.set(cacheKey, response); // Cache for default 7 days if no ttl is provided
+        } else {
+            cache.set(cacheKey, response);
+        }
     }
     console.log('[CACHE MISS] Fetched API and cached response for key:', cacheKey);
     return response;
